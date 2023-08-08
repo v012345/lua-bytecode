@@ -18,7 +18,7 @@
     </div>
     <div class="k-container">
         <div>k :</div>
-        <ol>
+        <ol start="0">
             <template v-for="value in list.k">
                 <li>{{ value }}</li>
             </template>
