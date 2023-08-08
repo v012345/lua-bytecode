@@ -1,24 +1,33 @@
 <template>
     <div class="locvars-container">
         <div>locvars :</div>
-        <template v-for="value, index in list.locvars">
-            <span>{{ index }} {{ value }}</span>
-        </template>
+        <ol>
+            <template v-for="value in list.locvars">
+                <li>{{ value }}</li>
+            </template>
+        </ol>
     </div>
     <div class="upvalues-container">
         <div>upvalues :</div>
-        <template v-for="value, index in list.upvalues">
-            <span>{{ index }} {{ value }}</span>
-        </template>
+        <ol>
+            <template v-for="value in list.upvalues">
+                <li> {{ value }}</li>
+            </template>
+        </ol>
+
     </div>
     <div class="k-container">
         <div>k :</div>
-        <template v-for="value, index in list.k">
-            <span>{{ index }} {{ value }}</span>
-        </template>
+        <ol>
+            <template v-for="value in list.k">
+                <li>{{ value }}</li>
+            </template>
+        </ol>
+
     </div>
 
     <div class="code-container">
+        <div>OpCode :</div>
         <ol>
             <template v-for="value in list.code">
                 <li><span class="OpCode">{{ value.OpCode }}</span>{{ value.VmExecute }}</li>
@@ -26,15 +35,21 @@
         </ol>
 
     </div>
-    <div class="p-container">
+    <div>
         <template v-for="value, index in list.p">
-            <div>p[{{ index - 1 }}] :</div>
-            <RootNav :list="value" />
+            <div>
+                <button @click="isOpen[index] = !isOpen[index]">p[{{ index - 1 }}] :</button>
+            </div>
+            <div class="p-container" v-show="!isOpen[index]">
+                <RootNav :list="value" />
+            </div>
         </template>
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+const isOpen = ref([])
 const props = defineProps({
     list: {
         type: Object,
